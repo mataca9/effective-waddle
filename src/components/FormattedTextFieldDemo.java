@@ -161,10 +161,35 @@ public class FormattedTextFieldDemo extends JPanel
         //Create and set up the window.
         JFrame frame = new JFrame("FormattedTextFieldDemo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //
-        JMenuItem newItem = new JMenuItem("New");
-        JMenuItem exitItem = new JMenuItem("Exit");
-        JMenuItem aboutItem = new JMenuItem("About");
+  
+        AbstractAction newAction = new AbstractAction(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("new");
+				
+			}
+		};
+		
+		AbstractAction exitAction = new AbstractAction(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("exit");
+				
+			}
+		};
+		
+		AbstractAction aboutAction = new AbstractAction(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("about");
+				
+			}
+		};
+        
+        
+        JMenuItem newItem = new JMenuItem(newAction);
+        JMenuItem exitItem = new JMenuItem(exitAction);
+		JMenuItem aboutItem = new JMenuItem(aboutAction);
         
         JMenu file = new JMenu("File");
         JMenu help = new JMenu("Help");
@@ -177,9 +202,9 @@ public class FormattedTextFieldDemo extends JPanel
         
         JMenuBar menuBar = new JMenuBar();
         JToolBar toolBar = new JToolBar("Toolbar");
-        toolBar.add(new JButton("New"));
-        toolBar.add(new JButton("About"));
-        toolBar.add(new JButton("Exit"));
+        toolBar.add(new JButton(newAction));
+        toolBar.add(new JButton(aboutAction));
+        toolBar.add(new JButton(exitAction));
         toolBar.setFloatable(false);
         toolBar.setRollover(true);
         frame.add(toolBar, BorderLayout.PAGE_START);
