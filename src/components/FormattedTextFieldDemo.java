@@ -176,12 +176,22 @@ public class FormattedTextFieldDemo extends JPanel
         help.add(aboutItem);
         
         JMenuBar menuBar = new JMenuBar();
+        JToolBar toolBar = new JToolBar("Toolbar");
+        toolBar.add(new JButton("New"));
+        toolBar.add(new JButton("About"));
+        toolBar.add(new JButton("Exit"));
+        toolBar.setFloatable(false);
+        toolBar.setRollover(true);
+        frame.add(toolBar, BorderLayout.PAGE_START);
+        
         menuBar.add(file);
         menuBar.add(help);
         frame.setJMenuBar(menuBar);
 
         //Add contents to the window.
         frame.add(new FormattedTextFieldDemo());
+        
+        //Tool bar config
 
         //Display the window.
         frame.pack();
