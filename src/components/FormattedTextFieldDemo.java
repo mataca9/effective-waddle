@@ -51,9 +51,7 @@ import java.text.*;
  */
 public class FormattedTextFieldDemo extends JPanel
                                     implements PropertyChangeListener {
-    
-	private Data data = new Data(100000, 7.5, 30);
-	
+    private Data data = new Data(100000, 7.5, 30);
 	//Labels to identify the fields
     private JLabel amountLabel;
     private JLabel rateLabel;
@@ -80,9 +78,9 @@ public class FormattedTextFieldDemo extends JPanel
     public FormattedTextFieldDemo() {
         super(new BorderLayout());
         setUpFormats();
-        double payment = computePayment(data.amount,
-                                        data.rate,
-                                        data.numPeriods);
+        double payment = computePayment(data.getAmount(),
+                                        data.getRate(),
+                                        data.getNumPeriods());
 
         //Create the labels.
         amountLabel = new JLabel(amountString);
@@ -92,17 +90,17 @@ public class FormattedTextFieldDemo extends JPanel
 
         //Create the text fields and set them up.
         amountField = new JFormattedTextField(amountFormat);
-        amountField.setValue(new Double(data.amount));
+        amountField.setValue(new Double(data.getAmount()));
         amountField.setColumns(10);
         amountField.addPropertyChangeListener("value", this);
 
         rateField = new JFormattedTextField(percentFormat);
-        rateField.setValue(new Double(data.rate));
+        rateField.setValue(new Double(data.getRate()));
         rateField.setColumns(10);
         rateField.addPropertyChangeListener("value", this);
 
         numPeriodsField = new JFormattedTextField();
-        numPeriodsField.setValue(new Integer(data.numPeriods));
+        numPeriodsField.setValue(new Integer(data.getNumPeriods()));
         numPeriodsField.setColumns(10);
         numPeriodsField.addPropertyChangeListener("value", this);
 
@@ -143,14 +141,14 @@ public class FormattedTextFieldDemo extends JPanel
     public void propertyChange(PropertyChangeEvent e) {
         Object source = e.getSource();
         if (source == amountField) {
-            data.amount = ((Number)amountField.getValue()).doubleValue();
+            data.setAmount(((Number)amountField.getValue()).doubleValue());
         } else if (source == rateField) {
-            data.rate = ((Number)rateField.getValue()).doubleValue();
+            data.setRate(((Number)rateField.getValue()).doubleValue());
         } else if (source == numPeriodsField) {
-            data.numPeriods = ((Number)numPeriodsField.getValue()).intValue();
+            data.setNumPeriods(((Number)numPeriodsField.getValue()).intValue());
         }
 
-        double payment = computePayment(data.amount, data.rate, data.numPeriods);
+        double payment = computePayment(data.getAmount(), data.getRate(), data.getNumPeriods());
         paymentField.setValue(new Double(payment));
     }
 
